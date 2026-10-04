@@ -42,7 +42,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const sidebarContent = (
     <div className="flex flex-col h-full bg-[#13233b] text-white">
       {/* Brand Header */}
-      <div className="h-16 flex items-center justify-between px-4 border-b border-blue-900/40">
+      <div className="h-20 flex items-center justify-between px-4 border-b border-blue-900/40">
         {!isCollapsed ? (
           <div className="flex items-center gap-2">
             <Logo variant="horizontal" theme="light" />

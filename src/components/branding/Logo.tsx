@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface LogoProps {
   variant?: 'horizontal' | 'vertical' | 'icon-only';
@@ -14,85 +15,58 @@ export const Logo: React.FC<LogoProps> = ({
   className = '',
   showSubtitle = false,
 }) => {
-  const isLight = theme === 'light'; // For dark backgrounds (sidebar, login left)
-  const iconStroke = isLight ? '#93c5fd' : '#1e3a8a';
-  const personFill = isLight ? '#bfdbfe' : '#2563eb';
+  const isLight = theme === 'light'; // For dark backgrounds (sidebar, login left, footer)
   const textColor = isLight ? 'text-white' : 'text-slate-900';
-  const subtextColor = isLight ? 'text-blue-200' : 'text-slate-600';
-
-  const iconSvg = (
-    <svg
-      viewBox="0 0 64 64"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={
-        variant === 'vertical'
-          ? 'w-20 h-20 md:w-24 md:h-24'
-          : variant === 'icon-only'
-          ? 'w-9 h-9'
-          : 'w-8 h-8'
-      }
-    >
-      {/* House outline */}
-      <path
-        d="M8 32L32 12L56 32V54C56 55.1046 55.1046 56 54 56H10C8.89543 56 8 55.1046 8 54V32Z"
-        stroke={iconStroke}
-        strokeWidth="3"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      {/* Cross on roof apex */}
-      <path
-        d="M32 4V12M28 8H36"
-        stroke={iconStroke}
-        strokeWidth="3"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      {/* Center adult figure */}
-      <circle cx="32" cy="35" r="4.5" fill={personFill} />
-      <path
-        d="M24 50C24 44.5 27.5 42 32 42C36.5 42 40 44.5 40 50"
-        stroke={iconStroke}
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-      {/* Left child/person */}
-      <circle cx="21" cy="38" r="3.5" fill={personFill} />
-      <path
-        d="M15 50C15 46 17.5 44 21 44C22.5 44 23.8 44.5 24.8 45.4"
-        stroke={iconStroke}
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-      {/* Right child/person */}
-      <circle cx="43" cy="38" r="3.5" fill={personFill} />
-      <path
-        d="M39.2 45.4C40.2 44.5 41.5 44 43 44C46.5 44 49 46 49 50"
-        stroke={iconStroke}
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
+  const subtextColor = isLight ? 'text-blue-200' : 'text-slate-500';
 
   if (variant === 'icon-only') {
-    return <div className={`inline-flex items-center justify-center ${className}`}>{iconSvg}</div>;
+    return (
+      <div className={`relative inline-flex items-center justify-center ${className}`}>
+        <div className={`relative w-10 h-10 ${isLight ? 'bg-white p-1 rounded-lg shadow-xs' : ''}`}>
+          <Image
+            src="/images/logo-recanto-betel-50-anos.png"
+            alt="Associação Recanto Betel 50 anos"
+            fill
+            sizes="40px"
+            className="object-contain"
+            priority
+          />
+        </div>
+      </div>
+    );
   }
 
   if (variant === 'vertical') {
     return (
       <div className={`flex flex-col items-center text-center select-none ${className}`}>
-        <div className="mb-4 drop-shadow-sm">{iconSvg}</div>
-        <span className={`text-sm uppercase tracking-widest font-medium ${subtextColor}`}>
+        <div
+          className={`relative w-36 h-36 md:w-44 md:h-44 mb-3 drop-shadow-md transition-transform hover:scale-105 duration-300 ${
+            isLight ? 'bg-white/95 p-3 rounded-2xl ring-2 ring-white/30 shadow-lg' : ''
+          }`}
+        >
+          <Image
+            src="/images/logo-recanto-betel-50-anos.png"
+            alt="Associação Recanto Betel - 50 anos"
+            fill
+            sizes="(max-width: 768px) 144px, 176px"
+            className="object-contain"
+            priority
+          />
+        </div>
+        <span className={`text-xs uppercase tracking-widest font-semibold ${subtextColor}`}>
           Associação
         </span>
-        <span className={`text-2xl md:text-3xl font-bold tracking-tight ${textColor}`}>
+        <span className={`text-2xl md:text-3xl font-extrabold tracking-tight ${textColor}`}>
           Recanto Betel
         </span>
+        <div className="mt-1 flex items-center gap-1.5 text-xs font-semibold text-amber-400">
+          <span>1976 — 2026</span>
+          <span>•</span>
+          <span>50 Anos</span>
+        </div>
         {showSubtitle && (
-          <p className="mt-3 text-sm md:text-base text-blue-100/90 font-normal max-w-xs leading-relaxed">
-            Cuidando de vidas, construindo futuros.
+          <p className="mt-2 text-xs md:text-sm text-blue-100/90 font-normal max-w-xs leading-relaxed">
+            Transformando vidas, construindo futuro.
           </p>
         )}
       </div>
@@ -101,13 +75,35 @@ export const Logo: React.FC<LogoProps> = ({
 
   // Horizontal variant (default)
   return (
-    <Link href="/" className={`inline-flex items-center gap-3 select-none group ${className}`}>
-      <div className="flex-shrink-0 transition-transform group-hover:scale-105">{iconSvg}</div>
+    <Link
+      href="/"
+      className={`inline-flex items-center gap-3 select-none group focus:outline-none focus:ring-2 focus:ring-blue-600 rounded-lg p-0.5 ${className}`}
+      aria-label="Ir para a página inicial da Associação Recanto Betel"
+    >
+      <div
+        className={`relative h-[54px] w-[54px] sm:h-[60px] sm:w-[60px] flex-shrink-0 transition-transform group-hover:scale-105 duration-200 ${
+          isLight ? 'bg-white p-1 rounded-xl shadow-xs ring-1 ring-slate-100' : ''
+        }`}
+      >
+        <Image
+          src="/images/logo-recanto-betel-50-anos.png"
+          alt="Logo Oficial 50 Anos - Associação Recanto Betel"
+          fill
+          sizes="60px"
+          className="object-contain"
+          priority
+        />
+      </div>
       <div className="flex flex-col leading-tight">
-        <span className={`text-[10px] uppercase tracking-wider font-semibold opacity-75 ${subtextColor}`}>
+        <span className={`text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold ${subtextColor}`}>
           Associação
         </span>
-        <span className={`text-lg font-bold tracking-tight ${textColor}`}>Recanto Betel</span>
+        <span className={`text-base sm:text-lg font-extrabold tracking-tight ${textColor}`}>
+          Recanto Betel
+        </span>
+        <span className="text-[10px] font-bold text-amber-600 tracking-wide flex items-center gap-1">
+          50 anos • 1976–2026
+        </span>
       </div>
     </Link>
   );
