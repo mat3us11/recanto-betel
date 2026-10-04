@@ -20,7 +20,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDonate }) => {
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-[1.15]">
-              Proteção social, vínculos e <span className="text-[#0d3f73] underline decoration-amber-400 decoration-wavy decoration-2">cidadania</span>
+              Proteção social, vínculos e <span className="text-[#0d3f73]">cidadania</span>
             </h1>
 
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
